@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 11036,
+  "expoServerNgrokUrl": "https://bp-ki3.sylver10.news.exp.direct",
+  "packagerNgrokUrl": "https://packager.bp-ki3.sylver10.news.exp.direct",
+  "ngrokPid": 14620
 }
