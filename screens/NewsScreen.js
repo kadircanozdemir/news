@@ -11,9 +11,10 @@ import {
 import NewsItem from "./components/NewsItem";
 import { Notifications } from "expo";
 
+const ip = "http://172.20.10.3:3000";
 export default class NewsScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       news: [],
       notification: {},
@@ -38,8 +39,9 @@ export default class NewsScreen extends React.Component {
   }
   _handleNotification(notification) {
     const { data } = notification;
+    console.log(data);
     this.props.navigation.navigate("NewDetail", {
-      data: data.item,
+      data: data,
       token: this.state.userToken,
       refreshFunction: this.refreshFunction
     });
@@ -56,7 +58,7 @@ export default class NewsScreen extends React.Component {
     );
   }
   fetchNews = async () => {
-    await fetch("http://192.168.14.244:3000/news?" + this.state.filterQuery, {
+    await fetch(ip + "/news?" + this.state.filterQuery, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -77,23 +79,21 @@ export default class NewsScreen extends React.Component {
         qstring = qstring + `&category=${categori}`;
       }
     });
+    console.log(qstring);
     await this.setState({ filterQuery: qstring });
-  };
-  _handleNotification = notification => {
-    this.setState({ notification: notification });
   };
 
   _showDialog = () => this.setState({ visible: true });
   _hideDialog = async () => {
     await this.setFilterQuery();
-    this.fetchNews();
+    await this.refreshFunction();
 
     this.setState({ visible: false });
     //console.log(this.state.filterQuery);
   };
   _keyExtractor = (item, index) => index.toString();
   refreshFunction = async () => {
-    await fetch("http://192.168.14.244:3000/news?" + this.state.filterQuery, {
+    await fetch(ip + "/news?" + this.state.filterQuery, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -169,7 +169,6 @@ export default class NewsScreen extends React.Component {
         </Portal>
         <FlatList
           data={this.state.news}
-          extraData={this.state.news}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />

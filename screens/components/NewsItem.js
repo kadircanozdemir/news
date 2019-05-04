@@ -3,6 +3,7 @@ import { Platform, StyleSheet } from "react-native";
 import { Card, Title, Paragraph, IconButton, Text } from "react-native-paper";
 import moment from "moment";
 
+const ip = "http://172.20.10.3:3000";
 export default class NewsItem extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ export default class NewsItem extends React.Component {
     if (!item.likes.includes(userToken)) {
       let likesArr = [...item.likes];
       likesArr.push(userToken);
-      await fetch("http://192.168.14.244:3000/news/" + item._id, {
+      await fetch(ip + "/news/" + item._id, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -41,7 +42,7 @@ export default class NewsItem extends React.Component {
     if (item.likes.includes(userToken)) {
       let likesArr = [...item.likes];
       likesArr.pop(userToken);
-      await fetch("http://192.168.14.244:3000/news/" + item._id, {
+      await fetch(ip + "/news/" + item._id, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -64,7 +65,7 @@ export default class NewsItem extends React.Component {
     if (!item.dislikes.includes(userToken)) {
       let dislikesArr = [...item.dislikes];
       dislikesArr.push(userToken);
-      await fetch("http://192.168.14.244:3000/news/" + item._id, {
+      await fetch(ip + "/news/" + item._id, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -87,7 +88,7 @@ export default class NewsItem extends React.Component {
     if (item.dislikes.includes(userToken)) {
       let dislikesArr = [...item.dislikes];
       dislikesArr.pop(userToken);
-      await fetch("http://192.168.14.244:3000/news/" + item._id, {
+      await fetch(ip + "/news/" + item._id, {
         method: "PUT",
         headers: {
           Accept: "application/json",

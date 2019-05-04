@@ -11,6 +11,7 @@ import { AppLoading, Notifications, Permissions, Font, Icon } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 import { Portal } from "react-native-paper";
 
+const ip = "http://172.20.10.3:3000";
 export default class App extends React.Component {
   constructor() {
     super();
@@ -97,7 +98,7 @@ export default class App extends React.Component {
   };
   getUserToken = async val => {
     let pushToken = "";
-    await fetch("http://192.168.14.244:3000/user?token=" + val, {
+    await fetch(ip + "/user?token=" + val, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -119,7 +120,7 @@ export default class App extends React.Component {
   pushUserToken = async val => {
     let pushToken = "";
 
-    await fetch("http://192.168.14.244:3000/user", {
+    await fetch(ip + "/user", {
       method: "POST",
       headers: {
         Accept: "application/json",

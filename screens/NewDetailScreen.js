@@ -3,6 +3,7 @@ import { Platform, StyleSheet, View } from "react-native";
 import { Appbar, Portal, Dialog, Button, Text } from "react-native-paper";
 import NewsItem from "./components/NewsItem";
 
+const ip = "http://172.20.10.3:3000";
 export default class NewDetailScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +30,7 @@ export default class NewDetailScreen extends React.Component {
   updateViewCount = async item => {
     let viewsArr = [...item.views];
     viewsArr.push(this.state.token);
-    await fetch("http://192.168.14.244:3000/news/" + item._id, {
+    await fetch(ip + "/news/" + item._id, {
       method: "PUT",
       headers: {
         Accept: "application/json",
